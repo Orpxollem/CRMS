@@ -9,6 +9,11 @@ import Deals from './pages/Deals';
 import Tasks from './pages/Tasks';
 import Companies from './pages/Companies';
 import Settings from './pages/Settings';
+import SignUp from './pages/SignUp';
+import ForgotPassword from './pages/ForgotPassword';
+import NotFound from './pages/NotFound';
+import TermsOfService from './pages/TermsOfService';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
@@ -17,6 +22,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="contacts" element={<Contacts />} />
@@ -25,6 +34,7 @@ function App() {
             <Route path="companies" element={<Companies />} />
             <Route path="settings" element={<Settings />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </AppProvider>

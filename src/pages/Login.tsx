@@ -157,7 +157,7 @@ const Login: React.FC = () => {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200">
+                <a href="/forgot-password" className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200">
                   Forgot password?
                 </a>
               </div>
@@ -177,8 +177,8 @@ const Login: React.FC = () => {
           <div className="mt-8 text-center animate-fade-in">
             <p className="text-sm text-neutral-600">
               Don't have an account?{' '}
-              <a href="#" className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200">
-                Start your free trial
+              <a href="/signup" className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-200">
+                Sign up now
               </a>
             </p>
           </div>

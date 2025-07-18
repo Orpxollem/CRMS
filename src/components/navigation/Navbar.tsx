@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
                     Profile Settings
                   </a>
                   
-                  <a href="#" className="flex items-center px-4 py-3 text-sm text-error-600 hover:bg-error-50 transition-colors duration-200">
+                  <a href="/" className="flex items-center px-4 py-3 text-sm text-error-600 hover:bg-error-50 transition-colors duration-200">
                     <LogOut size={16} className="mr-3" />
                     Sign out
                   </a>

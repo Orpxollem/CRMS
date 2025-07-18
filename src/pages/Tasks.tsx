@@ -4,11 +4,14 @@ import { useApp } from '../context/AppContext';
 import TaskListItem from '../components/tasks/TaskListItem';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
+import Modal from '../components/common/Modal';
+import TaskForm from '../components/tasks/TaskForm';
 
 const Tasks: React.FC = () => {
   const { tasks } = useApp();
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPriority, setSelectedPriority] = useState<string>('all');
 
   const filters = [
@@ -61,6 +64,7 @@ const Tasks: React.FC = () => {
           <p className="text-neutral-600 mt-1">Manage your activities and stay productive</p>
         </div>
         <Button 
+          onClick={() => setIsModalOpen(true)}
           icon={<Plus size={18} />}
           size="lg"
           className="shadow-glow hover:shadow-glow-lg"
@@ -255,6 +259,15 @@ const Tasks: React.FC = () => {
           <Button>Create Your First Task</Button>
         </div>
       )}
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Add New Contact"
+        size="lg"
+      >
+        <TaskForm onSuccess={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 };

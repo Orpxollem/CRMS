@@ -3,10 +3,13 @@ import { Plus, Search, Building2, Globe, Users, MapPin, Phone, Mail, TrendingUp,
 import { useApp } from '../context/AppContext';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
+import Modal from '../components/common/Modal';
+import CompanyForm from '../components/company/CompanyForm';
 
 const Companies: React.FC = () => {
   const { companies } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
@@ -36,6 +39,7 @@ const Companies: React.FC = () => {
           <p className="text-neutral-600 mt-1">Manage your business relationships and partnerships</p>
         </div>
         <Button 
+          onClick={() => setIsModalOpen(true)}
           icon={<Plus size={18} />}
           size="lg"
           className="shadow-glow hover:shadow-glow-lg"
@@ -285,6 +289,15 @@ const Companies: React.FC = () => {
           <Button>Add Your First Company</Button>
         </div>
       )}
+
+            <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Add New Contact"
+        size="lg"
+      >
+        <CompanyForm onSuccess={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 };

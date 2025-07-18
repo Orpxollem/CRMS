@@ -4,11 +4,14 @@ import { useApp } from '../context/AppContext';
 import DealCard from '../components/deals/DealCard';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
+import DealForm from '../components/deals/DealForm';
+import Modal from '../components/common/Modal';
 
 const Deals: React.FC = () => {
   const { deals } = useApp();
   const [selectedStage, setSelectedStage] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'cards' | 'pipeline'>('cards');
 
   const stages = [
@@ -74,6 +77,7 @@ const Deals: React.FC = () => {
             </button>
           </div>
           <Button 
+            onClick={() => setIsModalOpen(true)}
             icon={<Plus size={18} />}
             size="lg"
             className="shadow-glow hover:shadow-glow-lg"
@@ -278,6 +282,16 @@ const Deals: React.FC = () => {
           <Button>Create Your First Deal</Button>
         </div>
       )}
+
+            {/* Deal Form Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Add New Contact"
+        size="lg"
+      >
+        <DealForm onSuccess={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 };
