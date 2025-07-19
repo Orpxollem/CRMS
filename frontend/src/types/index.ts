@@ -57,8 +57,13 @@ export interface Company {
 
 export interface User {
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
   avatar: string;
   role: string;
+  phone?: string;
+  job_title?: string;
+  company?: string;
+  department?: string;
 }

@@ -6,6 +6,10 @@ const Navbar: React.FC = () => {
   const { user, sidebarOpen, setSidebarOpen } = useApp();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  if (!user) {
+    return null; // or a placeholder UI for unauthenticated state
+  }
+
   return (
     <header className="bg-white/80 backdrop-blur-xl shadow-soft border-b border-neutral-100 sticky top-0 z-30">
       <div className="flex items-center justify-between px-6 py-4">
@@ -42,12 +46,12 @@ const Navbar: React.FC = () => {
             >
               <img
                 className="w-10 h-10 rounded-xl object-cover shadow-soft"
-                src={user.avatar}
-                alt={user.name}
+                src={user.avatar && user.avatar.trim() !== '' ? user.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKSvz-pQ_DnjayP8dqG8Y5FcoQ439f_X4AAgxARdFyjNhin5z2G2Ro-hsWCWtUspamFpo&usqp=CAU'}
+                alt={user.firstname + ' ' + user.lastname}
               />
               <div className="hidden md:block text-left">
-                <div className="text-sm font-semibold text-neutral-900">{user.name}</div>
-                <div className="text-xs text-neutral-500">{user.role}</div>
+                <div className="text-sm font-semibold text-neutral-900">{user.firstname} {user.lastname}</div>
+                <div className="text-xs text-neutral-500">{user.job_title || user.role}</div>
               </div>
               <ChevronDown size={16} className={`text-neutral-400 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -59,11 +63,11 @@ const Navbar: React.FC = () => {
                     <div className="flex items-center space-x-3">
                       <img
                         className="w-10 h-10 rounded-xl object-cover"
-                        src={user.avatar}
-                        alt={user.name}
+                        src={user.avatar && user.avatar.trim() !== '' ? user.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKSvz-pQ_DnjayP8dqG8Y5FcoQ439f_X4AAgxARdFyjNhin5z2G2Ro-hsWCWtUspamFpo&usqp=CAU'}
+                        alt={user.firstname + ' ' + user.lastname}
                       />
                       <div>
-                        <div className="text-sm font-semibold text-neutral-900">{user.name}</div>
+                        <div className="text-sm font-semibold text-neutral-900">{user.firstname} {user.lastname}</div>
                         <div className="text-xs text-neutral-500">{user.email}</div>
                       </div>
                     </div>

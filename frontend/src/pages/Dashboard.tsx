@@ -9,6 +9,10 @@ import PipelineChart from '../components/dashboard/PipelineChart';
 const Dashboard: React.FC = () => {
   const { contacts, deals, tasks, companies, user } = useApp();
 
+  if (!user) {
+    return <div>Please log in to view the dashboard.</div>;
+  }
+
   const totalRevenue = deals
     .filter(deal => deal.stage === 'closed-won')
     .reduce((sum, deal) => sum + deal.value, 0);
@@ -28,22 +32,22 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      {/* Welcome Header */}
+      {/* Welcome Header */} 
       <div className="bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-600 rounded-3xl p-8 text-white shadow-large relative overflow-hidden">
         <div className="relative z-10">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold mb-2">
-                {getGreeting()}, {user.name.split(' ')[0]}! 👋
+                {getGreeting()}, {user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : 'User'}! 👋
               </h1>
               <p className="text-primary-100 text-lg">
-                Here's what's happening with your business today
+                {user.job_title || user.role}
               </p>
             </div>
             <div className="hidden md:block">
               <img
-                src={user.avatar}
-                alt={user.name}
+                src={user.avatar && user.avatar.trim() !== '' ? user.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKSvz-pQ_DnjayP8dqG8Y5FcoQ439f_X4AAgxARdFyjNhin5z2G2Ro-hsWCWtUspamFpo&usqp=CAU'}
+                alt={user.firstname && user.lastname ? `${user.firstname} ${user.lastname}` : 'User'}
                 className="w-16 h-16 rounded-2xl border-4 border-white/20 shadow-soft"
               />
             </div>

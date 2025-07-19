@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Lock, Mail, Sparkles, ArrowRight, Shield, Zap, Users } from 'lucide-react';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
+import { useApp } from '../context/AppContext';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -11,9 +12,18 @@ const Login: React.FC = () => {
     password: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useApp();
+  const [error, setError] = React.useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/dashboard');
+    const success = await login(formData.email, formData.password);
+    if (success) {
+      setError(null);
+      navigate('/dashboard');
+    } else {
+      setError('Invalid email or password');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -173,6 +183,11 @@ const Login: React.FC = () => {
               Sign in to your account
             </Button>
           </form>
+          {error && (
+            <p className="text-red-600 text-sm mt-2 text-center" role="alert">
+              {error}
+            </p>
+          )}
 
           <div className="mt-8 text-center animate-fade-in">
             <p className="text-sm text-neutral-600">

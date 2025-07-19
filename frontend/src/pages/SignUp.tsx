@@ -86,7 +86,7 @@ const SignUp: React.FC = () => {
     if (step === 1) {
       setStep(2);
     } else {
-      // Handle account creation
+      // Signup backend integration removed as per user request
       navigate('/dashboard');
     }
   };

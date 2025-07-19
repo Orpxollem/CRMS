@@ -17,16 +17,16 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   return (
-    <AppProvider>
-      <Router>
+    <Router>
+      <AppProvider>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout />} >
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="deals" element={<Deals />} />
@@ -36,8 +36,8 @@ function App() {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
-    </AppProvider>
+      </AppProvider>
+    </Router>
   );
 }
 
